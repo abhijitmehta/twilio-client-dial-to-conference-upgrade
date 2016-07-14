@@ -10,7 +10,7 @@ account_sid = ENV['twilio_account_sid']
 auth_token  = ENV['twilio_auth_token']
 appsid      = ENV['twilio_app_id_latency']
 
-callbackurl = 'https://yourserver.ngrok.io'  #change to ngrok address
+#callbackurl = "#{request.base_url}"  #use ngrok to access test page, not localhost
 
 
 
@@ -57,7 +57,7 @@ post '/modifycall' do
 
 
   @client.account.calls.get(callSid).update({
-	   :url =>  callbackurl + '/monitor',
+	   :url =>  "#{request.base_url}" + '/monitor',
   })
 
 end
@@ -71,7 +71,7 @@ post '/dialpstn' do
   call = @client.account.calls.create({
        :to => number,
        :from => caller_id,
-       :url =>  callbackurl + "/callcustomer?CustomerNumber=#{customernumber}&AgentNumber=#{number}"
+       :url =>  "#{request.base_url}" + "/callcustomer?CustomerNumber=#{customernumber}&AgentNumber=#{number}"
   })
 
 
@@ -84,7 +84,7 @@ post '/callcustomer' do
   number = params[:CustomerNumber]
   agentnumber = params[:AgentNumber]
   response = Twilio::TwiML::Response.new do |r|
-    r.Dial :callerId => agentnumber, :action => callbackurl + "/monitor" do |d|
+    r.Dial :callerId => agentnumber, :action => "#{request.base_url}" + "/monitor" do |d|
       d.Number number
     end
   end
