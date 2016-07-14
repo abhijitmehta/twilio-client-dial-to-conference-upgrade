@@ -8,12 +8,12 @@
             "description": "Your Twilio Account Id"
     },
     "twilio_auth_token": {
-            "description": "Your Twilio Account Token" 
+            "description": "Your Twilio Account Token"
     },
      "twilio_caller_id": {
-            "description": "Must be a Twilio number in your account" 
+            "description": "Must be a Twilio number in your account"
     },
-    "twilio_app_id": {
+    "twilio_app_id_latency": {
             "description": "Application Id - you must create app in your Twilio Account -> Dev Tools ->  Twiml Apps"
     }
   }
